@@ -15,114 +15,121 @@
         /* Body styling */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #6dd5ed, #2193b0);
-            color: #333;
+            background: linear-gradient(135deg, #4e54c8, #8f94fb, #6dd5ed);
+            background-size: 400% 400%;
+            color: #fff;
+            height: 100vh;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
             text-align: center;
+            animation: backgroundFlow 10s ease infinite;
         }
 
-        /* Container */
-        .container {
-            background-color: #fff;
-            padding: 30px 50px;
-            border-radius: 15px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-            max-width: 420px;
-            width: 100%;
-            animation: slideIn 1s ease-out;
-        }
-
-        /* Animasi untuk kontainer */
-        @keyframes slideIn {
-            from {
-                transform: translateY(20px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        /* Title styling */
-        h1 {
-            color: #2193b0;
-            font-size: 2.2rem;
-            margin-bottom: 1rem;
-        }
-
-        /* Message styling */
-        p {
-            font-size: 1.1rem;
-            margin: 0.8rem 0;
-            color: #555;
-        }
-
-        /* Logout button styling */
-        a.logout-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 20px;
-            padding: 12px 25px;
-            font-size: 1rem;
-            color: #fff;
-            background-color: #2193b0;
-            border-radius: 8px;
-            text-decoration: none;
-            transition: all 0.4s ease;
+        /* Header styling */
+        .header {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 1.5rem;
             font-weight: bold;
         }
 
-        /* Icon animasi pada button */
-        a.logout-btn svg {
-            transition: transform 0.3s ease;
+        /* Logout button */
+        .logout-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            font-size: 0.9rem;
+            color: #fff;
+            background-color: #4e54c8;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            display: inline-flex;
+            align-items: center;
         }
 
-        /* Hover effect pada button */
-        a.logout-btn:hover {
-            background-color: #6dd5ed;
+        .logout-btn:hover {
+            background-color: #8f94fb;
         }
 
-        /* Hover effect untuk icon */
-        a.logout-btn:hover svg {
-            transform: translateX(5px);
+        .logout-btn svg {
+            margin-left: 5px;
+            width: 18px;
+            height: 18px;
         }
 
-        /* Icon styling */
-        .icon {
-            width: 20px;
-            height: 20px;
-            fill: #fff;
+        /* Welcome message */
+        .welcome-message {
+            font-size: 1.8rem;
+            margin-top: 60px;
+            color: #fff;
+            animation: textMove 5s ease-in-out infinite alternate;
+        }
+
+        /* Link styling */
+        .nav-link {
+            font-size: 1.2rem;
+            color: #fff;
+            background-color: #4e54c8;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            margin-top: 20px;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background-color: #8f94fb;
+        }
+
+        /* Background animation */
+        @keyframes backgroundFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Text animation */
+        @keyframes textMove {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-10px); }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Dashboard Admin</h1>
-        
+    <!-- Header -->
+    <div class="header">Halaman Admin</div>
+
+    <!-- Welcome Message -->
+    <div class="welcome-message">
         @if ($message = Session::get('success'))
-            <p>{{ $message }}</p>
+            {{ $message }}
         @else
-            <p>You are logged in!</p>
+            Selamat Datang di Dashboard Anda!
         @endif
-
-        <a href="{{ route('logout') }}" 
-           class="logout-btn"
-           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-            Logout
-            <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path d="M16 13v-2H7V9l-5 4 5 4v-3h9zM19 3H5c-1.1 0-2 .9-2 2v3h2V5h14v14H5v-3H3v3c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/>
-            </svg>
-        </a>
-
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-            @csrf
-        </form>
     </div>
+
+    <!-- Data Siswa Link -->
+    <a class="nav-link" href="{{ route('siswa.index') }}">Data Siswa</a>
+
+    <!-- Logout Button -->
+    <a href="{{ route('logout') }}" 
+       class="logout-btn"
+       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+        Logout
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1m0-10V5a2 2 0 00-2-2h-6a2 2 0 00-2 2v14a2 2 0 002 2h6a2 2 0 002-2v-1"/>
+        </svg>
+    </a>
+
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        @csrf
+    </form>
 </body>
 </html>
