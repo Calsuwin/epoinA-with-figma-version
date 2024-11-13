@@ -1,0 +1,96 @@
+/* Reset styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #4e54c8, #8f94fb);
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Container for form */
+.register-container {
+    background-color: #fff;
+    padding: 40px 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+/* Title */
+.register-container h1 {
+    color: #4e54c8;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+/* Link to login */
+.register-container a {
+    color: #4e54c8;
+    font-size: 0.9rem;
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+/* Form styling */
+.register-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Input styling */
+.register-container label {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+.register-container input[type="text"],
+.register-container input[type="email"],
+.register-container input[type="password"] {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    width: 100%;
+}
+
+/* Error message styling */
+.text-danger {
+    color: #ff4d4d;
+    font-size: 0.8rem;
+    text-align: left;
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
+
+/* Button styling */
+.register-container input[type="submit"] {
+    padding: 12px;
+    background-color: #4e54c8;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.register-container input[type="submit"]:hover {
+    background-color: #8f94fb;
+}
