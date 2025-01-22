@@ -1,5 +1,3 @@
-
-
 <?php $__env->startSection('content'); ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +10,7 @@
 <body>
     <div class="login-container">
         <h1>Login</h1>
-        <a href="<?php echo e(route('register')); ?>">Daftar</a>
+        
         <form action="<?php echo e(route('authenticate')); ?>" method="post">
             <?php echo csrf_field(); ?>
             <label for="email">Email Address</label>

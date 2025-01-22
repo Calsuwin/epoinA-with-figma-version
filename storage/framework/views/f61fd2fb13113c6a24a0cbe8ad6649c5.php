@@ -24,6 +24,7 @@
 
     <!-- Data Siswa Link -->
     <a class="nav-link" href="<?php echo e(route('siswa.index')); ?>">Data Siswa</a>
+    <a class="nav-link" href="<?php echo e(route('akun.index')); ?>">Data Akun</a>
 
     <!-- Logout Button -->
     <a href="<?php echo e(route('logout')); ?>" 

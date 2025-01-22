@@ -23,6 +23,7 @@
 
     <!-- Data Siswa Link -->
     <a class="nav-link" href="{{ route('siswa.index') }}">Data Siswa</a>
+    <a class="nav-link" href="{{ route('akun.index') }}">Data Akun</a>
 
     <!-- Logout Button -->
     <a href="{{ route('logout') }}" 

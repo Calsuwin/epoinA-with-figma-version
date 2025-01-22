@@ -12,7 +12,7 @@
 <body>
     <div class="login-container">
         <h1>Login</h1>
-        <a href="{{ route('register') }}">Daftar</a>
+        
         <form action="{{ route('authenticate') }}" method="post">
             @csrf
             <label for="email">Email Address</label>
