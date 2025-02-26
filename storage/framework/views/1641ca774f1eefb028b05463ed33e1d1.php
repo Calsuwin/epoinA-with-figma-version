@@ -13,6 +13,8 @@
 
     <div>
       <img src="<?php echo e(asset('storage/siswas/'.$siswa->image)); ?>" alt="Profile Picture" class="profile-img">
+
+
     </div>
 
     <table>

@@ -12,7 +12,8 @@
     <a href="{{ route('siswa.index')}}" class="back-link">Kembali</a>
 
     <div>
-      <img src="{{ asset('storage/app/public/siswas'.$siswa->image) }}" alt="Profile Picture" class="profile-img">
+      <img src="{{ asset('storage/siswas/'.$siswa->image) }}" alt="Profile Picture" class="profile-img">
+
 
     </div>
 
