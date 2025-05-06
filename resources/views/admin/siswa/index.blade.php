@@ -4,7 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Data Siswa</title>
-    <link href="{{ asset('css/index.css') }}" rel="stylesheet">
+    {{-- <link href="{{ asset('css/index.css') }}" rel="stylesheet"> --}}
+    <style>
+        table img {
+            width: 150px;
+            height: auto;
+            object-fit: cover;
+            border-radius: 7px;
+        }
+        .pagination {
+            font-size: 0.75rem;
+            margin-top: 1rem;
+        }
+        table {
+  width: 80%;
+  border-collapse: collapse;
+}
+th, td {
+  border: 1px solid #ccc;
+  padding: 0.5rem;
+  text-align: center;
+}
+thead th {
+  background-color: #f5f5f5;
+}
+
+    </style>
 </head>
 <body>
     <div class="container">
@@ -12,8 +37,11 @@
 
         <div class="nav-links">
             <a href="{{ route('admin/dashboard') }}">Menu Utama</a>
-            <a href="{{ route('siswa.create') }}">Tambah Siswa</a>
-            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+            
+            <a href="{{ route('logout') }}"
+               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+               Logout
+            </a>
         </div>
 
         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -29,13 +57,13 @@
 
         <!-- Search Form -->
         <div class="search-container">
-            <form action="" method="get">
+            <form action="{{ route('siswa.index') }}" method="get">
                 <label for="search">Cari :</label>
-                <input type="text" name="cari" placeholder="Cari data siswa..." id="search">
-                <input type="submit" value="Cari">
+                <input type="text" name="cari" placeholder="Cari data siswa..." id="search" value="{{ request('cari') }}">
+                <button type="submit">Cari</button>
             </form>
         </div>
-
+<div> <a href="{{ route('siswa.create') }}">Tambah Siswa</a></div>
         <!-- Table Data Siswa -->
         <table>
             <thead>
@@ -54,7 +82,13 @@
                 @forelse ($siswas as $siswa)
                 <tr>
                     <td>
-                        <img src="{{ asset('storage/siswas/'.$siswa->image) }}" alt="Foto Siswa">
+                        @if($siswa->image)
+                            <img 
+                              src="{{ asset('storage/siswas/' . $siswa->image) }}" 
+                              alt="Foto {{ $siswa->name }}">
+                        @else
+                            <span>No Image</span>
+                        @endif
                     </td>
                     <td>{{ $siswa->nis }}</td>
                     <td><strong>{{ $siswa->name }}</strong></td>
@@ -65,7 +99,9 @@
                     <td>
                         <a href="{{ route('siswa.show', $siswa->id) }}" class="btn btn-dark">SHOW</a>
                         <a href="{{ route('siswa.edit', $siswa->id) }}" class="btn btn-primary">EDIT</a>
-                        <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('siswa.destroy', $siswa->id) }}" method="POST" style="display: inline;">
+                        <form onsubmit="return confirm('Apakah Anda Yakin?');" 
+                              action="{{ route('siswa.destroy', $siswa->id) }}" 
+                              method="POST" style="display: inline;">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger">HAPUS</button>
@@ -82,7 +118,7 @@
 
         <!-- Pagination Links -->
         <div class="pagination">
-            {{ $siswas->links() }}
+            {!! $siswas->links() !!}
         </div>
     </div>
 </body>

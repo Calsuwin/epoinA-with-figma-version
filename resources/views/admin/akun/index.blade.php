@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Data User</title>
-    <style>
+    {{-- <style>
         /* Reset styles */
         * {
             margin: 0;
@@ -127,7 +127,7 @@
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
-    </style>
+    </style> --}}
 </head>
 <body>
     <div class="container">

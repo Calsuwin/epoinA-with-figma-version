@@ -39,6 +39,8 @@ class PelanggaranController extends Controller
             'konsekuensi'  => $request->konsekuensi,
             'poin'         => $request->poin
         ]);
+         //redirect to index
+         return redirect()->route('pelanggaran.index')->with(['success' => 'Data Berhasil Ditambahkan!']);
     }
     public function search(string $cari)
     {

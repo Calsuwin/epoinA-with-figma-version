@@ -1,29 +1,42 @@
-@extends('auth.layouts')
-
-@section('content')
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    
-</head><link href="{{ asset('css/login.css') }}" rel="stylesheet">
+    <title>Login </title>
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}"> {{-- Optional: sesuaikan CSS --}}
+</head>
 <body>
-    <div class="login-container">
-        <h1>Login</h1>
-        
-        <form action="{{ route('authenticate') }}" method="post">
+    <div class="container">
+        <h2>Login </h2>
+
+        @if(session('success'))
+            <div class="alert alert-success">{{ session('success') }}</div>
+        @endif
+
+        @if($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        <form action="{{ route('authenticate') }}" method="POST">
             @csrf
-            <label for="email">Email Address</label>
-            <input type="email" id="email" name="email" value="{{ old('email') }}" required>
-            
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" required>
-            
-            <input type="submit" value="Login">
+            <div>
+                <label>Email:</label>
+                <input type="email" name="email" value="{{ old('email') }}" required>
+            </div>
+            <div>
+                <label>Password:</label>
+                <input type="password" name="password" required>
+            </div>
+            <div>
+                <button type="submit">Login</button>
+            </div>
         </form>
     </div>
 </body>
 </html>
-@endsection

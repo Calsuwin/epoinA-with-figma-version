@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Data Akun</title>
-  <style>
+  {{-- <style>
     /* Base Reset */
     * {
       margin: 0;
@@ -86,7 +86,7 @@
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
-  </style>
+  </style> --}}
 </head>
 <body>
   <div class="container">
@@ -115,13 +115,13 @@
 
       <label>Nama Lengkap</label>
       <input type="text" id="name" name="name" value="{{ $akun->name }}">
-      
+      <br><br>
       <label>Hak Akses</label>
       <select name="usertype" required>
         <option {{ 'admin' == $akun->usertype ? 'selected' : '' }} value="admin">Admin</option>
         <option {{ 'ptk' == $akun->usertype ? 'selected' : '' }} value="ptk">PTK</option>
       </select>
-      
+      <br><br>
       <button type="submit">SIMPAN DATA</button>
     </form>
 
@@ -131,20 +131,20 @@
 
       <label>Email Address</label>
       <input type="email" id="email" name="email" value="{{ $akun->email }}">
-      
+      <br><br>
       <button type="submit">SIMPAN EMAIL</button>
     </form>
-
+    <br><br>
     <form action="{{ route('updatePassword', $akun->id) }}" method="POST">
       @csrf
       @method('PUT')
 
       <label>Password</label>
       <input type="password" id="password" name="password">
-      
+      <br><br>
       <label>Confirm Password</label>
       <input type="password" id="password_confirmation" name="password_confirmation">
-      
+      <br><br>
       <button type="submit">SIMPAN PASSWORD</button>
     </form>
   </div>

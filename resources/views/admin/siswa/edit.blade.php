@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Edit Siswa</title>
-  <link href="{{ asset('css/edit.css') }}" rel="stylesheet">
+  {{-- <link href="{{ asset('css/edit.css') }}" rel="stylesheet"> --}}
   
 </head>
 <body>
@@ -29,9 +29,17 @@
       <div class="details-section">
         <div class="half-section">
           <label>Foto Siswa</label><br>
-          <img src="{{ asset('storage/siswas/' . $siswa->image) }}" class="profile-img" alt=""><br>
+          <img 
+  src="{{ asset('storage/siswas/' . $siswa->image) }}" 
+  style="height:150px; object-fit:cover; border-radius:35%; border:3px solid #ccc;"
+  alt="Foto {{ $siswa->name }}">
+
+          <br>
           <input type="file" name="image" accept="image/*">
         </div>
+        <!-- ... bagian form lain ... -->
+      </div>
+      
 
         <div class="half-section">
           <label>NIS Siswa</label><br>

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Detail Siswa</title>
-  <link href="{{ asset('css/show.css') }}" rel="stylesheet">
+  {{-- <link href="{{ asset('css/show.css') }}" rel="stylesheet"> --}}
 </head>
 <body>
   <div class="container">
@@ -12,7 +12,7 @@
     <a href="{{ route('siswa.index')}}" class="back-link">Kembali</a>
 
     <div>
-      <img src="{{ asset('storage/siswas/'.$siswa->image) }}" alt="Profile Picture" class="profile-img">
+      <img src="{{ asset('storage/siswas/'.$siswa->image) }}" alt="Profile Picture" style="height: 150px; border-radius:30%; solid #ccc;" class="profile-img">
 
 
     </div>
