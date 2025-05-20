@@ -4,11 +4,63 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Pelanggar;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
     public function index()
     {
-        return view('admin.dashboard');
+        $pelanggars = $this->top10Pelanggar();
+        $hitung = $this->hitungPelanggaran();
+        list($jmlSiswas, $jmlPelanggars) = $this->countDash();
+        return view('admin.dashboard', compact('pelanggars', 'hitung', 'jmlSiswas', 'jmlPelanggars'));
     }
+
+    public function top10Pelanggar()
+    {
+        $pelanggars = DB::table('pelanggars')
+            ->join('siswas', 'pelanggars.id_siswa', '=', 'siswas.id')
+            ->join('users', 'siswas.id_user', '=', 'users.id')
+            ->select(
+                'pelanggars.*',
+                'siswas.image',
+                'siswas.nis',
+                'siswas.tingkatan',
+                'siswas.jurusan',
+                'siswas.kelas',
+                'siswas.hp',
+                'users.name',
+                'users.email'
+            )->where('pelanggars.poin_pelanggar', '>=', '45')->orderBy('pelanggars.poin_pelanggar', 'DESC')->take(10)->get();
+        return $pelanggars;
+    }
+
+    public function top10Pelanggaran()
+    {
+        $hitung = DB::table('detail_pelanggars')
+            ->join('pelanggarans', 'detail_pelanggars.id_pelanggaran', '=', 'pelanggarans.id')
+            ->select(
+                'detail_pelanggars.*',
+                'pelanggarans',
+                DB::raw('COUNT(pelanggarans.jenis) as totals')
+            )
+            ->groupBy('detail_pelanggars.id', 'pelanggarans.jenis' 'pelanggarans.jenis') 
+            ->orderByRaw('totals DESC')
+            ->take(10)
+            ->get();
+
+        return $hitung;
+}
+
+public function countDash()
+{
+
+    $jmlSiswas = DB::table('siswas')->count();
+
+    $jmlPelanggars = DB::table('pelanggars')->count();
+
+
+    return [$jmlSiswas, $jmlPelanggars];
+}
 }

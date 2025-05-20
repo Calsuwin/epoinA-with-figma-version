@@ -25,6 +25,7 @@
     <a class="nav-link" href="{{ route('siswa.index') }}">Data Siswa</a>
     <a class="nav-link" href="{{ route('akun.index') }}">Data Akun</a>
     <a class="nav-link" href="{{ route('pelanggaran.index') }}">Data Pelanggaran</a>
+    <a class="nav-link" href="{{ route('pelanggar.index') }}">Data Pelanggar</a>
 
     <!-- Logout Button -->
     <a href="{{ route('logout') }}" 

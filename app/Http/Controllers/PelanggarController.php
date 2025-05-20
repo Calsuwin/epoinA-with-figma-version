@@ -203,7 +203,7 @@ function calculatedPoin(string $id_pelanggaran, string $id_pelanggar)
 {
     $poin_pelanggaran = DB::table('pelanggarans')->where('id', $id_pelanggaran)->value('poin');
     $poin_pelanggar = DB::table('pelanggars')->where('id', $id_pelanggar)->value('poin_pelanggar');
-    $poin = $poin_pelanggar->poin_pelanggaran;
+    $poin = $poin_pelanggar + $poin_pelanggaran;
 
     return $poin;
 }
@@ -315,7 +315,7 @@ function updateStatus($datas, string $poin)
     public function destroyPelanggaran(string $id)
     {
         //get id user
-        $pelanggaran = DB::table ('detail_pelanggarans')->where('id_pelanggar', $id);
+        $pelanggaran = DB::table ('detail_pelanggars')->where('id_pelanggar', $id);
         
         //delete post
         $pelanggaran->delete();

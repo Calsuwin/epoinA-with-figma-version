@@ -9,7 +9,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\PelanggaranController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\PelanggarController;
-use App\Http\Controllers\DetailPelanggaranController;
+use App\Http\Controllers\DetailPelanggarController;
 
 
 // ROOT: kalau sudah login → dashboard, kalau belum → login view
@@ -39,6 +39,6 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::resource('admin/pelanggar', PelanggarController::class);
     Route::post('/admin/pelanggar/storePelanggaran', [PelanggarController::class, 'storePelanggaran'])->name('pelanggar.storePelanggaran');
     Route::put('/admin/pelanggar/statusTindak/{akun}', [PelanggarController::class, 'statusTindak'])->name('pelanggar.statusTindak');
-    Route::resource('/admin/detailPelanggar', DetailPelanggaranController::class);
+    Route::resource('/admin/detailPelanggar', DetailPelanggarController::class);
     Route::post('/logout', [LoginRegisterController::class, 'logout'])->name('logout');
 });
