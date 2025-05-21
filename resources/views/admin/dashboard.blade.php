@@ -1,44 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Admin</title>
-
-    <!-- Link ke file CSS -->
-    {{-- <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet"> --}}
 </head>
+
 <body>
-    <!-- Header -->
-    <div class="header">Halaman Admin</div>
-
-    <!-- Welcome Message -->
-    <div class="welcome-message">
-        @if ($message = Session::get('success'))
-            {{ $message }}
-        @else
-            Selamat Datang di Dashboard Anda!
-        @endif
-    </div>
-
-    <!-- Data Siswa Link -->
     <a class="nav-link" href="{{ route('siswa.index') }}">Data Siswa</a>
     <a class="nav-link" href="{{ route('akun.index') }}">Data Akun</a>
     <a class="nav-link" href="{{ route('pelanggaran.index') }}">Data Pelanggaran</a>
     <a class="nav-link" href="{{ route('pelanggar.index') }}">Data Pelanggar</a>
-
-    <!-- Logout Button -->
-    <a href="{{ route('logout') }}" 
-       class="logout-btn"
-       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-        Logout
-        {{-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1m0-10V5a2 2 0 00-2-2h-6a2 2 0 00-2 2v14a2 2 0 002 2h6a2 2 0 002-2v-1"/>
-        </svg> --}}
-    </a>
-
-    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+    <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+    <form id="logout-form" action="{{ route('logout') }}" method="POST">
         @csrf
-    </form>
+ </form>
+    <h1>Dashboard Admin</h1>
+    @if ($message = Session::get('message'))
+    <p>{{ $message }}</p>
+    @else
+    <p>You are Logged in!</p>
+    @endif
+
+   
+    <h3>Jumlah siswa {{ $jmlSiswas }}</h3>
+    <h3>Jumlah pelanggar {{ $jmlPelanggars }}</h3>
+    <br><br><br>
+
+   <h1>Top 10 siswa dengan poin pelanggaran tertinggi</h1><br>
+    <table class="tabel">
+        <tr>
+                <th>Foto</th>
+                <th>NIS</th>
+                <th>Nama</th>
+                <th>Kelas</th>
+                <th>No Hp</th>
+                <th>Poin</th>
+                <th>Status</th>
+                <th>Aksi</th>
+            </tr>
+        @forelse ($pelanggars as $pelanggar)
+        <tr>
+            <td>
+                <img src="{{ asset('storage/siswas/' .$pelanggar->image) }}" alt="" width="120px">
+            </td>
+            <td>{{ $pelanggar->nis }}</td>
+            <td>{{ $pelanggar->name }}</td>
+            <td>{{ $pelanggar->tingkatan }} {{ $pelanggar->jurusan }} {{ $pelanggar->kelas }}</td>
+            <td>{{ $pelanggar->hp }}</td>
+            <td>{{ $pelanggar->poin_pelanggar }}</td>
+            <td>
+                <a href="{{ route('pelanggar.show', $pelanggar->id) }}" class="btn btn-sm btn-dark">Data Pelanggaran</a>
+            </td>
+        </tr>
+        @empty
+        <tr>
+            <td>
+                <p>Data Tidak Ditemukan</p>
+            </td>
+            <td>
+                <a href="{{ route('pelanggar.index') }}">kembali</a>
+            </td>
+        </tr>
+        @endforelse
+    </table>
+
+    <br><br><br>
+
+    <h1>Top 10 Pelanggaran yang sering dilakukan</h1><br>
+    <table class="tabel">
+        <tr>
+            <th>Nama Pelanggaran</th>
+            <th>Konsekuensi</th>
+            <th>Poin</th>
+            <th>Total Pelanggaran</th>
+        </tr>
+        @forelse ($hitung as $hit)
+        <tr>
+            <td>{{ $hit->jenis }}</td>
+            <td>{{ $hit->konsekuensi }}</td>
+            <td>{{ $hit->poin }}</td>
+            <td>{{ $hit->totals }}</td>
+        </tr>
+        @empty
+        <tr>
+            <td>
+                <p>Data Tidak Ditemukan</p>
+            </td>
+        </tr>
+        @endforelse
+    </table>
+
 </body>
+
+<footer>
+
+</footer>
+
 </html>

@@ -12,7 +12,7 @@ class AdminController extends Controller
     public function index()
     {
         $pelanggars = $this->top10Pelanggar();
-        $hitung = $this->hitungPelanggaran();
+        $hitung = $this->top10Pelanggaran();
         list($jmlSiswas, $jmlPelanggars) = $this->countDash();
         return view('admin.dashboard', compact('pelanggars', 'hitung', 'jmlSiswas', 'jmlPelanggars'));
     }
@@ -42,10 +42,10 @@ class AdminController extends Controller
             ->join('pelanggarans', 'detail_pelanggars.id_pelanggaran', '=', 'pelanggarans.id')
             ->select(
                 'detail_pelanggars.*',
-                'pelanggarans',
+                'pelanggarans.*',
                 DB::raw('COUNT(pelanggarans.jenis) as totals')
             )
-            ->groupBy('detail_pelanggars.id', 'pelanggarans.jenis' 'pelanggarans.jenis') 
+            ->groupBy('detail_pelanggars.id', 'pelanggarans.id', 'pelanggarans.jenis') 
             ->orderByRaw('totals DESC')
             ->take(10)
             ->get();
@@ -62,5 +62,5 @@ public function countDash()
 
 
     return [$jmlSiswas, $jmlPelanggars];
-}
+    }
 }
